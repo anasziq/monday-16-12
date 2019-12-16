@@ -1,0 +1,24 @@
+<ion-header translucent>
+    <ion-toolbar>
+      <ion-buttons *ngIf="(fromMoreInfo == 'yes')" slot="start">
+        <ion-back-button defaultHref="/more-info"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Map</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+<ion-content>
+
+  <form  *ngIf="(fromMoreInfo == 'yes')" [formGroup]="directionForm" >
+    <ion-item>
+      <ion-label position="floating">Destination</ion-label>
+      <ion-input formControlName="destination"></ion-input>
+    </ion-item>
+    <ion-button (click) = "calculateAndDisplayRoute(directionForm.value.destination)" type="submit" [disabled]="!directionForm.valid">Get Direction</ion-button>
+    <ion-button (click) = "calculateAndDisplayRouteN()"  type="submit" [disabled]="!directionForm.valid">Get waypoint Direction </ion-button>
+  </form>
+
+
+
+<div #gmap class="map" style="width:100%;height:100%"></div>
+</ion-content>

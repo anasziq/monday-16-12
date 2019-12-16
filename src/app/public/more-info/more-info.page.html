@@ -1,0 +1,51 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tab2"></ion-back-button>
+    </ion-buttons>
+    <ion-title>More Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+  <ion-content class="ion-padding">
+    <div *ngFor="let item of items$   | async json">
+      <div *ngIf=" (item.payload.val().name == myLocation) ">
+       
+        <ion-slides>
+          <ion-slide>
+            <img id="img2" src="{{item.payload.val().mainImages['img1']}}" alt="">
+          </ion-slide>
+          <ion-slide>
+            <img id="img3" src="{{item.payload.val().mainImages['img2']}}" alt="">
+          </ion-slide>
+          <ion-slide>
+            <img id="img4" src="{{item.payload.val().mainImages['img3']}}" alt="">
+          </ion-slide>
+          <ion-slide>
+            <img id="img5" src="{{item.payload.val().mainImages['img4']}}" alt="">
+          </ion-slide>
+        </ion-slides>
+        <div *ngIf="(language == 'English')">
+        <ion-text>
+         
+         
+          <h2>History : </h2>
+          <p> {{item.payload.val().description }} </p>
+        </ion-text>
+      </div>
+
+      <div *ngIf="(language == 'Arabic')">
+          <ion-text>
+            <h2 dir="rtl">التاريخ:</h2>
+            <p dir="rtl"> {{item.payload.val().descriptionArab}} </p>
+          </ion-text>
+        </div>
+
+      </div>
+    </div>
+    <ion-list>
+      <ion-item button detail (click)="goToMap()">
+        <ion-icon name="ios-navigate" slot="start"></ion-icon>
+        <ion-label>See it in the Map</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>

@@ -1,0 +1,13 @@
+{
+    "MessageUI.framework": 1,
+    "WebKit.framework": 1,
+    "CoreLocation.framework": 2,
+    "SafariServices.framework": 1,
+    "ImageIO.framework": 1,
+    "AVFoundation.framework": 2,
+    "QuartzCore.framework": 2,
+    "Accelerate.framework": 1,
+    "Security.framework": 1,
+    "Photos.framework": 1,
+    "SystemConfiguration.framework": 1
+}

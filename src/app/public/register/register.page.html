@@ -1,0 +1,80 @@
+
+<ion-header *ngIf="!signO" padding>
+    <div>
+        <ion-button color="secondary" (click)="relload()">Reload <ion-icon name="refresh"></ion-icon></ion-button>
+    </div>
+    <br>
+    <div>
+      Please send a verification email to verify your account
+    </div>
+    
+    <br>
+    <div>
+      <ion-button expand="block" color="secondary" (click)="sendVerificationEmail()">Send Verification Email</ion-button>
+    </div>
+    <br>
+    <div *ngIf="sentTimestamp">
+      Verification email sent at {{sentTimestamp | date:'medium'}}
+    </div>
+
+    <ion-grid slot="bottom">
+      <ion-row>
+        <ion-col>
+          <div><ion-button color="success" (click)="goIn()">Sign up</ion-button></div>
+        </ion-col>
+        <ion-col>
+          <div></div>
+        </ion-col>
+        <ion-col>
+          <div></div>
+        </ion-col>
+        <ion-col>
+          <div><ion-button color="dark" (click)="goBack()">Back</ion-button></div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-header>
+ 
+  <!-- no need validation -->
+  <ion-content  color="primary" *ngIf="signO">
+    <form  #form="ngForm" (ngSubmit)="register(form)">
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div text-center>
+              <h3>Create your account!</h3>
+            </div>
+            <div padding>
+              <ion-item>
+                <ion-input  name="name" type="text" placeholder="Name"  [(ngModel)]='name' required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input name="email" type="email" placeholder="your@email.com" [(ngModel)]='email'required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input name="password" type="password" placeholder="Password" [(ngModel)]='password' required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input name="confirm" type="password" placeholder="Password again" [(ngModel)]='passagain' ngModel required></ion-input>
+              </ion-item>
+            </div>
+            <div padding>
+              <ion-button  size="large" type="submit" [disabled]="form.invalid" (click)='signup()' expand="block">Register</ion-button>
+            </div>
+            <div padding>
+              <ion-button  size="large" (click)="loginF()" expand="block"><ion-icon name="logo-facebook" item-left></ion-icon><ion-label style="margin-left:1em;">Login with Facebook</ion-label></ion-button>
+            </div>
+            <div padding>
+              <ion-button  size="large" (click)="loginG()" expand="block"><ion-icon name="logo-google" item-left></ion-icon><ion-label style="margin-left:2em;">Login with Google</ion-label></ion-button>
+            </div>
+            <div padding>
+                <ion-button size="large"  (click)="backToLogin()" expand="block">I have an acount</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-content>
+
+

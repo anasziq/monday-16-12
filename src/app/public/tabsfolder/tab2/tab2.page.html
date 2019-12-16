@@ -1,0 +1,483 @@
+<ion-content class="ion-padding">
+    <ion-menu *ngIf="(c.language == 'English')" side="start">
+
+        <ion-header>
+            <ion-toolbar translucent>
+                <ion-title>Menu</ion-title>
+            </ion-toolbar>
+        </ion-header>
+
+        <ion-content>
+
+            <ion-list>
+                <ion-item button detail (click)='getAllPlaces()'>
+                    <ion-icon name="md-trending-up" slot="start"></ion-icon>
+                    <ion-label>All Places</ion-label>
+                </ion-item>
+                <ion-item button detail (click)='getMostPopular()'>
+                    <ion-icon name="md-trending-up" slot="start"></ion-icon>
+                    <ion-label>Most Popular</ion-label>
+                </ion-item>
+                <ion-item button detail (click)='getVisited()'>
+                    <ion-icon name="md-done-all" slot="start"></ion-icon>
+                    <ion-label>Visited</ion-label>
+                </ion-item>
+
+                <ion-item button detail (click)='getSaved()'>
+                    <ion-icon name="ios-bookmark" slot="start"></ion-icon>
+                    <ion-label>Saved</ion-label>
+                </ion-item>
+
+                <ion-item button detail (click)='getNear()'>
+                    <ion-icon name="ios-locate" slot="start"></ion-icon>
+                    <ion-label>Near to me</ion-label>
+                </ion-item>
+
+            </ion-list>
+
+        </ion-content>
+    </ion-menu>
+
+
+
+
+
+    <div class="ion-page" main>
+        <ion-header *ngIf="(c.language == 'English')">
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-menu-button></ion-menu-button>
+                </ion-buttons>
+                <ion-title>Main</ion-title>
+            </ion-toolbar>
+        </ion-header>
+
+
+        <ion-content class="ion-padding">
+            <h4 *ngIf="(c.language == 'English')">{{wherIam}}</h4>
+
+
+            <!-- all places English -->
+            <div *ngIf="(c.language == 'English')">
+                <div *ngFor="let item of items$   | async json">
+                    <ion-card *ngIf="allplaces">
+                        <img src={{item.payload.val().mainImg}} />
+                        <ion-card-header>
+                            <ion-card-subtitle>Destination</ion-card-subtitle>
+                            <ion-card-title>{{item.payload.val().name}}</ion-card-title>
+                        </ion-card-header>
+                        <ion-card-content>
+                            {{item.payload.val().introduction}}
+                        </ion-card-content>
+                        <div *ngIf="(language == English)">
+                            <ion-list>
+
+                                <ion-item button detail (click)="moreInfo(item.payload.val().name)">
+                                    <ion-icon name="add" slot="start"></ion-icon>
+                                    <ion-label>More Information</ion-label>
+                                </ion-item>
+                            </ion-list>
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col>
+
+                                        <ion-button expand="full" color="warning" width=50%
+                                            (click)="addToSaved(item.payload.val().name)">
+                                            <ion-icon name="ios-bookmark" slot="start"></ion-icon>Save
+                                        </ion-button>
+                                    </ion-col>
+                                    <ion-col>
+                                        <ion-button expand="full" color="success"
+                                            (click)="addToVisited(item.payload.val().name)">
+                                            <ion-icon name="md-done-all" slot="start"></ion-icon> Visit
+                                        </ion-button>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                    </ion-card>
+                </div>
+            </div>
+
+            <!-- Visted Places places English-->
+            <div *ngIf="(c.language == 'English')">
+                <div *ngFor="let place of visitedplaces   ">
+                    <div *ngFor="let item of items$   | async json">
+                        <ion-card *ngIf="visited && (item.payload.val().name == place) ">
+                            <img src={{item.payload.val().mainImg}} />
+                            <ion-card-header>
+                                <ion-card-subtitle>Destination</ion-card-subtitle>
+                                <ion-card-title>{{item.payload.val().name}}</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                {{item.payload.val().introduction}}
+                            </ion-card-content>
+                            <ion-list>
+                                <ion-item button detail (click)="moreInfo(item.payload.val().name)">
+                                    <ion-icon name="add" slot="start"></ion-icon>
+                                    <ion-label>More Information</ion-label>
+                                </ion-item>
+                            </ion-list>
+                        </ion-card>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Most popular places English-->
+            <div *ngIf="(c.language == 'English')">
+                <div *ngFor="let place of arrayVisit   ">
+                    <div *ngFor="let item of items$   | async json">
+                        <ion-card
+                            *ngIf="mostPop && (item.payload.val().visited != 0) &&(item.payload.val().visited == place) ">
+                            <img src={{item.payload.val().mainImg}} />
+                            <ion-card-header>
+                                <ion-card-subtitle>Destination</ion-card-subtitle>
+                                <ion-card-title>{{item.payload.val().name}}</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                {{item.payload.val().introduction}}
+                            </ion-card-content>
+                            <ion-list>
+                                <ion-item button detail (click)="moreInfo(item.payload.val().name)">
+                                    <ion-icon name="add" slot="start"></ion-icon>
+                                    <ion-label>More Information</ion-label>
+                                </ion-item>
+                            </ion-list>
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-button expand="full" color="warning" width=50%
+                                            (click)="addToSaved(item.payload.val().name)">
+                                            <ion-icon name="ios-bookmark" slot="start"></ion-icon>Save
+                                        </ion-button>
+                                    </ion-col>
+                                    <ion-col>
+                                        <ion-button expand="full" color="success"
+                                            (click)="addToVisited(item.payload.val().name)">
+                                            <ion-icon name="md-done-all" slot="start"></ion-icon> Visit
+                                        </ion-button>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+
+                        </ion-card>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- saved places English -->
+            <div *ngIf="(c.language == 'English')">
+                <div *ngFor="let place of savedplaces   ">
+                    <div *ngFor="let item of items$   | async json">
+                        <ion-card *ngIf="saved  && (item.payload.val().name == place)">
+                            <img src="{{item.payload.val().mainImg}} " />
+                            <ion-card-header>
+                                <ion-card-subtitle>Destination</ion-card-subtitle>
+                                <ion-card-title>{{item.payload.val().name}}</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                {{item.payload.val().introduction}}
+                            </ion-card-content>
+                            <ion-list>
+                                <ion-item button detail (click)="moreInfo(item.payload.val().name)">
+                                    <ion-icon name="add" slot="start"></ion-icon>
+                                    <ion-label>More Information</ion-label>
+                                </ion-item>
+                            </ion-list>
+                            <ion-button expand="full" color="danger"
+                                (click)="presentAlertConfirm(item.payload.val().name)">
+                                Remove </ion-button>
+                        </ion-card>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- near to me places places English -->
+            <div *ngIf="(c.language == 'English')">
+                <div *ngFor="let mark of markers">
+                    <div *ngFor="let item of items$   | async json">
+                        <ion-card *ngIf="(item.payload.val().location == mark.key) && near">
+                            <img src="{{item.payload.val().mainImg}} " />
+                            <ion-card-header>
+                                <ion-card-subtitle>Destination</ion-card-subtitle>
+                                <ion-card-title>{{item.payload.val().name}}</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                                {{item.payload.val().introduction}}
+                            </ion-card-content>
+                            <ion-list>
+                                <ion-item button detail (click)="moreInfo(item.payload.val().name)">
+                                    <ion-icon name="add" slot="start"></ion-icon>
+                                    <ion-label>More Information</ion-label>
+                                </ion-item>
+                            </ion-list>
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-button expand="full" color="warning" width=50%
+                                            (click)="addToSaved(item.payload.val().name)">
+                                            <ion-icon name="ios-bookmark" slot="start"></ion-icon>Save
+                                        </ion-button>
+                                    </ion-col>
+                                    <ion-col>
+                                        <ion-button expand="full" color="success"
+                                            (click)="addToVisited(item.payload.val().name)">
+                                            <ion-icon name="md-done-all" slot="start"></ion-icon> Visit
+                                        </ion-button>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+
+
+                        </ion-card>
+                    </div>
+                </div>
+            </div>
+
+
+        </ion-content>
+    </div>
+
+    <ion-content *ngIf="(c.language == 'Arabic')" dir="rtl" class="ion-padding">
+
+
+        <ion-menu *ngIf="(c.language == 'Arabic')" side="end" dir="rtl">
+
+            <ion-header>
+                <ion-toolbar translucent>
+                    <ion-title dir="rtl">القائمة</ion-title>
+                </ion-toolbar>
+            </ion-header>
+
+            <ion-content>
+
+                <ion-list>
+                    <ion-item button detail (click)='getAllPlaces()'>
+                        <ion-icon name="md-trending-up" slot="start"></ion-icon>
+                        <ion-label dir="rtl">جميع الاماكن</ion-label>
+                    </ion-item>
+                    <ion-item button detail (click)='getMostPopular()'>
+                        <ion-icon name="md-trending-up" slot="start"></ion-icon>
+                        <ion-label dir="rtl">الاماكن الاكثر زيارة</ion-label>
+                    </ion-item>
+                    <ion-item button detail (click)='getVisited()'>
+                        <ion-icon name="md-done-all" slot="start"></ion-icon>
+                        <ion-label dir="rtl">الاماكن التي زرتها</ion-label>
+                    </ion-item>
+
+                    <ion-item button detail (click)='getSaved()'>
+                        <ion-icon name="ios-bookmark" slot="start"></ion-icon>
+                        <ion-label dir="rtl">الاماكن المحفوظة</ion-label>
+                    </ion-item>
+
+                    <ion-item button detail (click)='getNear()'>
+                        <ion-icon name="ios-locate" slot="start"></ion-icon>
+                        <ion-label dir="rtl">الاماكن القريبة منك</ion-label>
+                    </ion-item>
+
+                </ion-list>
+
+            </ion-content>
+        </ion-menu>
+
+
+
+
+        <div class="ion-page" main>
+            <ion-header *ngIf="(c.language == 'Arabic')">
+                <ion-toolbar>
+                    <ion-buttons slot="start">
+                        <ion-menu-button></ion-menu-button>
+                    </ion-buttons>
+                    <ion-title dir="rtl">الرئيسية</ion-title>
+                </ion-toolbar>
+            </ion-header>
+
+            <ion-content class="ion-padding">
+                <h4 *ngIf="(c.language == 'Arabic')" dir="rtl">{{wherIama}}</h4>
+
+
+                <!-- all places Arabic -->
+                <div *ngIf="(c.language == 'Arabic')">
+                    <div *ngFor="let item of items$   | async json">
+                        <ion-card *ngIf="allplaces">
+                            <img src={{item.payload.val().mainImg}} />
+                            <ion-card-header>
+                                <ion-card-subtitle dir="rtl">الوجهة</ion-card-subtitle>
+                                <ion-card-title dir="rtl">{{item.payload.val().nameArab}}</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content dir="rtl">
+                                {{item.payload.val().introductionArab}}
+                            </ion-card-content>
+                            <ion-list>
+
+                                <ion-item button detail (click)="moreInfo(item.payload.val().name)">
+                                    <ion-icon name="add" slot="start"></ion-icon>
+                                    <ion-label>المزيد</ion-label>
+                                </ion-item>
+                            </ion-list>
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col>
+
+                                        <ion-button expand="full" color="warning" width=50%
+                                            (click)="addToSaved(item.payload.val().name)">
+                                            <ion-icon name="ios-bookmark" slot="start"></ion-icon>حفظ
+                                        </ion-button>
+                                    </ion-col>
+                                    <ion-col>
+                                        <ion-button expand="full" color="success"
+                                            (click)="addToVisited(item.payload.val().name)">
+                                            <ion-icon name="md-done-all" slot="start"></ion-icon> زيارة
+                                        </ion-button>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+
+                        </ion-card>
+                    </div>
+                </div>
+
+
+                <!-- Visted Places places Arabic-->
+                <div *ngIf="(c.language == 'Arabic')">
+                    <div *ngFor="let place of visitedplaces   ">
+                        <div *ngFor="let item of items$   | async json">
+                            <ion-card *ngIf="visited && (item.payload.val().name == place) ">
+                                <img src={{item.payload.val().mainImg}} />
+                                <ion-card-header>
+                                    <ion-card-subtitle dir="rtl">الوجهة</ion-card-subtitle>
+                                    <ion-card-title dir="rtl">{{item.payload.val().nameArab}}</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content dir="rtl">
+                                    {{item.payload.val().introductionArab}}
+                                </ion-card-content>
+                                <ion-list>
+                                    <ion-item button detail (click)="moreInfo(item.payload.val().name)">
+                                        <ion-icon name="add" slot="start"></ion-icon>
+                                        <ion-label>المزيد</ion-label>
+                                    </ion-item>
+                                </ion-list>
+                            </ion-card>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Most popular places Arabic-->
+                <div *ngIf="(c.language == 'Arabic')">
+                    <div *ngFor="let place of arrayVisit   ">
+                        <div *ngFor="let item of items$   | async json">
+                            <ion-card
+                                *ngIf="mostPop && (item.payload.val().visited != 0) &&(item.payload.val().visited == place) ">
+                                <img src={{item.payload.val().mainImg}} />
+                                <ion-card-header>
+                                    <ion-card-subtitle dir="rtl">الوجهة</ion-card-subtitle>
+                                    <ion-card-title dir="rtl">{{item.payload.val().nameArab}}</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content dir="rtl">
+                                    {{item.payload.val().introductionArab}}
+                                </ion-card-content>
+                                <ion-list>
+                                    <ion-item button detail (click)="moreInfo(item.payload.val().name)">
+                                        <ion-icon name="add" slot="start"></ion-icon>
+                                        <ion-label>المزيد</ion-label>
+                                    </ion-item>
+                                </ion-list>
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col>
+                                            <ion-button expand="full" color="warning" width=50%
+                                                (click)="addToSaved(item.payload.val().name)">
+                                                <ion-icon name="ios-bookmark" slot="start"></ion-icon>حفظ
+                                            </ion-button>
+                                        </ion-col>
+                                        <ion-col>
+                                            <ion-button expand="full" color="success"
+                                                (click)="addToVisited(item.payload.val().name)">
+                                                <ion-icon name="md-done-all" slot="start"></ion-icon> زيارة
+                                            </ion-button>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+
+                            </ion-card>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- saved places Arab -->
+                <div *ngIf="(c.language == 'Arabic')">
+                    <div *ngFor="let place of savedplaces   ">
+                        <div *ngFor="let item of items$   | async json">
+                            <ion-card *ngIf="saved  && (item.payload.val().name == place)">
+                                <img src="{{item.payload.val().mainImg}} " />
+                                <ion-card-header>
+                                    <ion-card-subtitle dir="rtl">الوجهة</ion-card-subtitle>
+                                    <ion-card-title dir="rtl">{{item.payload.val().nameArab}}</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content dir="rtl">
+                                    {{item.payload.val().introductionArab}}
+                                </ion-card-content>
+                                <ion-list>
+                                    <ion-item button detail (click)="moreInfo(item.payload.val().name)">
+                                        <ion-icon name="add" slot="start"></ion-icon>
+                                        <ion-label>المزيد</ion-label>
+                                    </ion-item>
+                                </ion-list>
+                                <ion-button expand="full" color="danger"
+                                    (click)="presentAlertConfirm(item.payload.val().name)">
+                                    حذف </ion-button>
+                            </ion-card>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- near to me places places Arabic -->
+                <div *ngIf="(c.language == 'Arabic')">
+                    <div *ngFor="let mark of markers">
+                        <div *ngFor="let item of items$   | async json">
+                            <ion-card *ngIf="(item.payload.val().location == mark.key) && near">
+                                <img src="{{item.payload.val().mainImg}} " />
+                                <ion-card-header>
+                                    <ion-card-subtitle dir="rtl">الوجهة</ion-card-subtitle>
+                                    <ion-card-title dir="rtl">{{item.payload.val().nameArab}}</ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content dir="rtl">
+                                    {{item.payload.val().introductionArab}}
+                                </ion-card-content>
+                                <ion-list>
+                                    <ion-item button detail (click)="moreInfo(item.payload.val().name)">
+                                        <ion-icon name="add" slot="start"></ion-icon>
+                                        <ion-label>المزيد</ion-label>
+                                    </ion-item>
+                                </ion-list>
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col>
+                                            <ion-button expand="full" color="warning" width=50%
+                                                (click)="addToSaved(item.payload.val().name)">
+                                                <ion-icon name="ios-bookmark" slot="start"></ion-icon>حفظ
+                                            </ion-button>
+                                        </ion-col>
+                                        <ion-col>
+                                            <ion-button expand="full" color="success"
+                                                (click)="addToVisited(item.payload.val().name)">
+                                                <ion-icon name="md-done-all" slot="start"></ion-icon> زيارة
+                                            </ion-button>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+
+
+                            </ion-card>
+                        </div>
+                    </div>
+                </div>
+
+            </ion-content>
+        </div>

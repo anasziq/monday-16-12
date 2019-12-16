@@ -1,0 +1,176 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["public-login-login-module"],{
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/public/login/login.page.html":
+/*!************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/public/login/login.page.html ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>login</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  padding>\n  \n    <ion-item>\n        <ion-label color = \"success\" position=\"floating\" >Email:</ion-label>\n        <ion-input placeholder-shown=\"what\" type=\"text\" [(ngModel)]=\"email\"  ></ion-input>\n    </ion-item>\n    <ion-item>\n        <ion-label color = \"success\" position=\"floating\">password:</ion-label>\n        <ion-input color = \"#00FFFFFF\" type =\"password\" [(ngModel)]=\"password\"></ion-input>\n    </ion-item>\n  <ion-button (click) = \"login()\" expand = \"block\" color=\"dark\">Log In</ion-button>\n  <ion-button (click) = \"rememberPassword()\" expand = \"block\" color=\"dark\">Forget password</ion-button>\n  <ion-button (click)=\"GoToRegister()\" expand=\"block\" color =\"success\">Register</ion-button>\n\n</ion-content>\n"
+
+/***/ }),
+
+/***/ "./src/app/public/login/login.module.ts":
+/*!**********************************************!*\
+  !*** ./src/app/public/login/login.module.ts ***!
+  \**********************************************/
+/*! exports provided: LoginPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _login_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./login.page */ "./src/app/public/login/login.page.ts");
+
+
+
+
+
+
+
+const routes = [
+    {
+        path: '',
+        component: _login_page__WEBPACK_IMPORTED_MODULE_6__["LoginPage"]
+    }
+];
+let LoginPageModule = class LoginPageModule {
+};
+LoginPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
+        ],
+        declarations: [_login_page__WEBPACK_IMPORTED_MODULE_6__["LoginPage"]]
+    })
+], LoginPageModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/public/login/login.page.scss":
+/*!**********************************************!*\
+  !*** ./src/app/public/login/login.page.scss ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "ion-content {\n  --background: url('crop.jpg') no-repeat 100% 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcHVibGljL2xvZ2luL0M6XFxVc2Vyc1xcYW5hcyB6aXFcXERlc2t0b3BcXFRlYW1Xb3JrLW1hc3Rlci9zcmNcXGFwcFxccHVibGljXFxsb2dpblxcbG9naW4ucGFnZS5zY3NzIiwic3JjL2FwcC9wdWJsaWMvbG9naW4vbG9naW4ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksaURBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL3B1YmxpYy9sb2dpbi9sb2dpbi5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tY29udGVudCB7XG4gICAgLS1iYWNrZ3JvdW5kOiB1cmwoJy4uLy4uLy4uL2Fzc2V0cy9pY29uL2Nyb3AuanBnJykgbm8tcmVwZWF0IDEwMCUgMTAwJTtcbn1cbiIsImlvbi1jb250ZW50IHtcbiAgLS1iYWNrZ3JvdW5kOiB1cmwoXCIuLi8uLi8uLi9hc3NldHMvaWNvbi9jcm9wLmpwZ1wiKSBuby1yZXBlYXQgMTAwJSAxMDAlO1xufSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/public/login/login.page.ts":
+/*!********************************************!*\
+  !*** ./src/app/public/login/login.page.ts ***!
+  \********************************************/
+/*! exports provided: LoginPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPage", function() { return LoginPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/authentication.service */ "./src/app/services/authentication.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_fire_database__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire/database */ "./node_modules/@angular/fire/database/es2015/index.js");
+/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/auth */ "./node_modules/@angular/fire/auth/es2015/index.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
+
+
+
+
+
+
+let LoginPage = class LoginPage {
+    constructor(authService, router, db, fireauth, toastController) {
+        this.authService = authService;
+        this.router = router;
+        this.db = db;
+        this.fireauth = fireauth;
+        this.toastController = toastController;
+        this.email = "";
+        this.password = "";
+        this.userList = db.list('/User/');
+    }
+    ngOnInit() {
+    }
+    login() {
+        const { email, password } = this;
+        console.log("the email is ", email, "the password is ", password);
+        this.authService.login();
+        this.fireauth.auth.signInWithEmailAndPassword(this.email, this.password)
+            .then(res => {
+            if (res.user) {
+                console.log(res.user);
+                //this.router.navigate(['members','dashboard']);
+                this.router.navigate(['user-page']);
+            }
+        })
+            .catch(err => {
+            console.log('login failed ${err}');
+            this.error = err.message;
+            this.presentToast(err.message);
+        });
+    }
+    GoToRegister() {
+        this.router.navigateByUrl('register');
+    }
+    rememberPassword() {
+        this.fireauth.auth.sendPasswordResetEmail(this.email)
+            .then(data => {
+            console.log(data);
+            alert('Password reset email sent');
+            this.router.navigateByUrl('/login');
+        })
+            .catch(err => {
+            console.log(' failed ${err}');
+            this.error = err.message;
+            this.presentToast(err.message);
+        });
+    }
+    presentToast(m) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const toast = yield this.toastController.create({
+                message: m,
+                duration: 5000
+            });
+            toast.present();
+        });
+    }
+};
+LoginPage.ctorParameters = () => [
+    { type: src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: _angular_fire_database__WEBPACK_IMPORTED_MODULE_4__["AngularFireDatabase"] },
+    { type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__["AngularFireAuth"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"] }
+];
+LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-login',
+        template: __webpack_require__(/*! raw-loader!./login.page.html */ "./node_modules/raw-loader/index.js!./src/app/public/login/login.page.html"),
+        styles: [__webpack_require__(/*! ./login.page.scss */ "./src/app/public/login/login.page.scss")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+        _angular_fire_database__WEBPACK_IMPORTED_MODULE_4__["AngularFireDatabase"], _angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__["AngularFireAuth"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"]])
+], LoginPage);
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=public-login-login-module-es2015.js.map
